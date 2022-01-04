@@ -31,4 +31,8 @@ greet(nil)
 //     no name
 ```
 
-If you want to disable `XCLog`, use `XCLog.enable = false` in your codes.
+If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your codes.
+
+## Documentation
+
+`XCLog` supports `DocC`. Use `Xcode > Product > Build Documentation` to check it.
