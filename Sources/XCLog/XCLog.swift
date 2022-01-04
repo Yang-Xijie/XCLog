@@ -6,7 +6,7 @@ import Foundation
 public struct XCLog {
     /// Enable `XCLog` to print in console of Xcode.
     ///
-    /// If you want to disable `XCLog`, use `Log.enable = false` in codes.
+    /// If you want to disable `XCLog`, use `XCLog.enable = false` in codes.
     public static var enable: Bool = true
 
     /// Print message to console in Xcode using the default `XCLogType.info`.

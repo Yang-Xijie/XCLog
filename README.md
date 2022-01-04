@@ -4,9 +4,10 @@
 
 ## Installation
 
-Open `Xcode > File > Add Packages...` and add `https://github.com/Yang-Xijie/XCLog`.
+1. Open `Xcode > File > Add Packages...`.
+2. Add `https://github.com/Yang-Xijie/XCLog`.
 
-## Usage Examples
+## Usage
 
 ```swift
 import Foundation
@@ -29,3 +30,5 @@ greet(nil)
 // [ERROR]   22/01/05 01:37:51    greet(_:)    main.swift(7)
 //     no name
 ```
+
+If you want to disable `XCLog`, use `XCLog.enable = false` in your codes.
