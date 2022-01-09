@@ -24,10 +24,10 @@ func greet(_ name: String!) {
 
 greet("Roger")
 // Hello, Roger!
-// [INFO]    22/01/05 01:36:43    greet(_:)    main.swift(11)
+// [INFO]    22/01/05 01:36:43    main.swift(11)    greet(_:)
 //     successfully
 greet(nil)
-// [ERROR]   22/01/05 01:37:51    greet(_:)    main.swift(7)
+// [ERROR]   22/01/05 01:37:51    main.swift(7)    greet(_:)
 //     no name
 ```
 

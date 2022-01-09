@@ -23,24 +23,32 @@ public struct XCLog {
 
     /// Print message in console using default `XCLogType`.
     @discardableResult
-    public init(_ message: String, fileID: String = #fileID, line: Int = #line, funcName: String = #function) {
-        self.init(.info, message, fileID: fileID, line: line, funcName: funcName)
+    public init(_ message: String, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.info, message, fileID: fileID, line: line, function: function)
     }
 
     /// Print message in console.
     @discardableResult
-    public init(_ type: XCLogType, _ message: String, fileID: String = #fileID, line: Int = #line, funcName: String = #function) {
+    public init(_ type: XCLogType, _ message: String, fileID: String = #fileID, line: Int = #line, function: String = #function) {
         if !Self.enable { return }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy/MM/dd HH:mm:ss"
-        let date = dateFormatter.string(from: Date())
-
         if Self.enableDict[type] ?? true {
-            print("[\(type.rawValue)]" + "\t" + date + "\t" + funcName + "\t" + "\((fileID as NSString).lastPathComponent)(\(line))")
+            // MARK: notation
+
+            let string_type = "[\(type.rawValue)]"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yy/MM/dd HH:mm:ss"
+            let string_date = dateFormatter.string(from: Date())
+            let string_file = "\((fileID as NSString).lastPathComponent)(\(line))"
+            let string_func = function
+
+            print(string_type + "\t" + string_date + "\t" + string_file + "\t" + string_func)
+
+            // MARK: message
+
             // replacingOccurrences: multi-line message support
             print("\t\(message.replacingOccurrences(of: "\n", with: "\n\t", options: .literal, range: nil))")
-        }
+        } else { return }
     }
 }
 
