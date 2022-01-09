@@ -1,4 +1,10 @@
-# HELP
+# Help
+
+## What are the relationship between Xcode and XCLog?
+
+`XC` in `XCLog` does come from `Xcode`. However, it is just the name.
+
+You can use this package in any Swift project because it is a Swift package. 
 
 ## What are the differences between XCLog and os Logger?
 
