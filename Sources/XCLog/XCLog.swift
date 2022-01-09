@@ -38,7 +38,8 @@ public struct XCLog {
 
         if Self.enableDict[type] ?? true {
             print("[\(type.rawValue)]" + "\t" + date + "\t" + funcName + "\t" + "\((fileID as NSString).lastPathComponent)(\(line))")
-            print("\t\(message)")
+            // replacingOccurrences: multi-line message support
+            print("\t\(message.replacingOccurrences(of: "\n", with: "\n\t", options: .literal, range: nil))")
         }
     }
 }
