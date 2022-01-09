@@ -42,7 +42,7 @@ public struct XCLog {
             let string_file = "\((fileID as NSString).lastPathComponent)(\(line))"
             let string_func = function
 
-            print(string_type + "\t" + string_date + "\t" + string_file + "\t" + string_func)
+            print(string_type + "\t" + "[" + string_date + "\t" + string_file + "\t" + string_func + "]")
 
             // MARK: message
 
