@@ -9,6 +9,15 @@ public struct XCLog {
     /// If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your codes.
     public static var enable: Bool = true
 
+    public static var enableDict: [XCLogType: Bool] = [
+        .trace: true,
+        .debug: true,
+        .info: true,
+        .warn: true,
+        .error: true,
+        .fatal: true,
+    ]
+
     /// Print message in console using default `XCLogType`.
     @discardableResult
     public init(_ message: String, fileID: String = #fileID, line: Int = #line, funcName: String = #function) {
@@ -24,14 +33,19 @@ public struct XCLog {
         dateFormatter.dateFormat = "yy/MM/dd HH:mm:ss"
         let date = dateFormatter.string(from: Date())
 
-        print("[\(type.rawValue)]" + "\t" + date + "\t" + funcName + "\t" + "\((fileID as NSString).lastPathComponent)(\(line))")
-        print("\t\(message)")
+        if Self.enableDict[type] ?? false {
+            print("[\(type.rawValue)]" + "\t" + date + "\t" + funcName + "\t" + "\((fileID as NSString).lastPathComponent)(\(line))")
+            print("\t\(message)")
+        }
     }
 }
 
 /// Message type.
 public enum XCLogType: String {
+    case trace = "TRACE"
     case debug = "DEBUG"
     case info = "INFO"
+    case warn = "WARN"
     case error = "ERROR"
+    case fatal = "FATAL"
 }

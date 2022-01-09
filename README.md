@@ -4,8 +4,8 @@
 
 ## Installation
 
-1. Open `Xcode > File > Add Packages...`.
-2. Add `https://github.com/Yang-Xijie/XCLog`.
+1. Go to `Xcode > File > Add Packages...`.
+2. Search for `https://github.com/Yang-Xijie/XCLog` and add it in your project.
 
 ## Usage
 
@@ -35,15 +35,5 @@ If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your 
 
 ## Documentation
 
-`XCLog` supports `DocC`. Use `Xcode > Product > Build Documentation` to check it.
-
-## Hint
-
-Referring to [Generating Log Messages from Your Code](https://developer.apple.com/documentation/os/logging/generating_log_messages_from_your_code):
-
-Insert log messages at appropriate points in your code and use them to diagnose issues later. Typically, you use log messages to:
-* Write a message at the start and end of functions and important tasks.
-* Write a message for any interesting events.
-* Write a message when a significant error occurs.
-* Write messages for important or unusual actions with a function. For example, log rarely taken code paths.
-* Write a message before each step of a multi-step task.
+* `XCLog` supports `DocC`. Use `Xcode > Product > Build Documentation` to check it.
+* Check other documentation in `Docs/`.
