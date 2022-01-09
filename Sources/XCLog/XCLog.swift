@@ -9,6 +9,9 @@ public struct XCLog {
     /// If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your codes.
     public static var enable: Bool = true
 
+    /// Enable `XCLog` to print some types of message in console.
+    ///
+    /// If you want to disable printing some `XCLogType`, set `XCLog.enableDict[XCLogType]` to `false` somewhere in your codes.
     public static var enableDict: [XCLogType: Bool] = [
         .trace: true,
         .debug: true,
@@ -33,7 +36,7 @@ public struct XCLog {
         dateFormatter.dateFormat = "yy/MM/dd HH:mm:ss"
         let date = dateFormatter.string(from: Date())
 
-        if Self.enableDict[type] ?? false {
+        if Self.enableDict[type] ?? true {
             print("[\(type.rawValue)]" + "\t" + date + "\t" + funcName + "\t" + "\((fileID as NSString).lastPathComponent)(\(line))")
             print("\t\(message)")
         }
