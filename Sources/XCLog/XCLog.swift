@@ -21,6 +21,12 @@ public struct XCLog {
         .fatal: true,
     ]
 
+    /// Print in console with no message.
+    @discardableResult
+    public init(_ type: XCLogType, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(type, "", fileID: fileID, line: line, function: function)
+    }
+
     /// Print message in console using default `XCLogType`.
     @discardableResult
     public init(_ message: String, fileID: String = #fileID, line: Int = #line, function: String = #function) {
@@ -46,8 +52,10 @@ public struct XCLog {
 
             // MARK: message
 
-            // replacingOccurrences: multi-line message support
-            print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t", options: .literal, range: nil))")
+            if message != "" {
+                // replacingOccurrences: multi-line message support
+                print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t", options: .literal, range: nil))")
+            }
         } else { return }
     }
 }
