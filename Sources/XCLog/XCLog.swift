@@ -23,22 +23,20 @@ public struct XCLog {
 
     /// Print in console with no message.
     @discardableResult
-    public init(_ type: XCLogType, fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(type, "", fileID: fileID, line: line, function: function)
+    public init(_ type: XCLogType, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(type, "", enable, fileID: fileID, line: line, function: function)
     }
 
     /// Print message in console using default `XCLogType`.
     @discardableResult
-    public init(_ message: String, fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.info, message, fileID: fileID, line: line, function: function)
+    public init(_ message: String, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.info, message, enable, fileID: fileID, line: line, function: function)
     }
 
     /// Print message in console.
     @discardableResult
-    public init(_ type: XCLogType, _ message: String, fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        if !Self.enable { return }
-
-        if Self.enableDict[type] ?? true {
+    public init(_ type: XCLogType, _ message: String, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        if Self.enable, Self.enableDict[type] ?? true, enable {
             // MARK: notation
 
             let string_type = "[\(type.rawValue)]"
