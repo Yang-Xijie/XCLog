@@ -52,7 +52,7 @@ public struct XCLog {
 
             if message != "" {
                 // replacingOccurrences: multi-line message support
-                print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t", options: .literal, range: nil))")
+                print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t\t", options: .literal, range: nil))")
             }
         } else { return }
     }
