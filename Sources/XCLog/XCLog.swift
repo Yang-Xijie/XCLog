@@ -23,7 +23,7 @@ public struct XCLog {
 
     /// Print in console with no message.
     @discardableResult
-    public init(_ type: XCLogType, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+    public init(_ type: XCLogType = .trace, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
         self.init(type, "", enable, fileID: fileID, line: line, function: function)
     }
 
