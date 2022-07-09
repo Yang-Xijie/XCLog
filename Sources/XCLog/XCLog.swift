@@ -1,5 +1,3 @@
-// XCLog.swift
-
 import Foundation
 
 /// A `Swift` extension that helps you print something in console when debugging your projects.
@@ -9,7 +7,7 @@ public struct XCLog {
     /// If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your codes.
     public static var enable = true
 
-    /// Enable `XCLog` to print some types of message in console.
+    /// Enable `XCLog` to print some types of items in console.
     ///
     /// If you want to disable printing some `XCLogType`, set `XCLog.enableDict[XCLogType]` to `false` somewhere in your codes.
     public static var enableDict: [XCLogType: Bool] = [
@@ -20,25 +18,6 @@ public struct XCLog {
         .error: true,
         .fatal: true,
     ]
-
-    /// Print in console with no message.
-    @discardableResult
-    public init(_ type: XCLogType = .trace,
-                _ enable: Bool = true,
-                fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(type, "",
-                  enable: enable,
-                  fileID: fileID, line: line, function: function)
-    }
-
-    /// Print items in console using `XCLogType.info`.
-    @discardableResult
-    public init(_ items: Any..., enable: Bool = true,
-                fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.info, items,
-                  enable: enable,
-                  fileID: fileID, line: line, function: function)
-    }
 
     /// Print items in console.
     @discardableResult
@@ -67,5 +46,66 @@ public struct XCLog {
                 print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t\t", options: .literal, range: nil))")
             } else { return }
         } else { return }
+    }
+
+    /// Print in console with no item.
+    @discardableResult
+    public init(_ type: XCLogType = .trace,
+                _ enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(type, "",
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    /// Print items in console using default `XCLogType.info`.
+    @discardableResult
+    public init(_ items: Any..., enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.info, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func trace(_ items: Any..., enable: Bool = true,
+                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func debug(_ items: Any..., enable: Bool = true,
+                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func info(_ items: Any..., enable: Bool = true,
+                            fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func warn(_ items: Any..., enable: Bool = true,
+                            fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func error(_ items: Any..., enable: Bool = true,
+                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    public static func fatal(_ items: Any..., enable: Bool = true,
+                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.trace, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
     }
 }

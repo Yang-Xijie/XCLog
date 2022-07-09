@@ -1,10 +1,10 @@
 import Foundation
 
-/// Message type.
+/// Types of XCLog .
 public enum XCLogType {
     case trace, debug, info, warn, error, fatal
 
-    var name: String {
+    public var name: String {
         switch self {
         case .trace:
             return "TRACE"
