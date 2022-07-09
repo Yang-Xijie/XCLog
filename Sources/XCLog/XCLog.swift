@@ -7,7 +7,7 @@ public struct XCLog {
     /// Enable `XCLog` to print in console.
     ///
     /// If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your codes.
-    public static var enable: Bool = true
+    public static var enable = true
 
     /// Enable `XCLog` to print some types of message in console.
     ///
@@ -23,23 +23,33 @@ public struct XCLog {
 
     /// Print in console with no message.
     @discardableResult
-    public init(_ type: XCLogType = .trace, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(type, "", enable, fileID: fileID, line: line, function: function)
+    public init(_ type: XCLogType = .trace,
+                _ enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(type, "",
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
     }
 
-    /// Print message in console using default `XCLogType`.
+    /// Print items in console using `XCLogType.info`.
     @discardableResult
-    public init(_ message: String, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.info, message, enable, fileID: fileID, line: line, function: function)
+    public init(_ items: Any..., enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(.info, items,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
     }
 
-    /// Print message in console.
+    /// Print items in console.
     @discardableResult
-    public init(_ type: XCLogType, _ message: String, _ enable: Bool = true, fileID: String = #fileID, line: Int = #line, function: String = #function) {
+    public init(_ type: XCLogType,
+                _ items: Any..., separator: String = " ",
+                enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
         if Self.enable, Self.enableDict[type] ?? true, enable {
             // MARK: notation
 
-            let string_type = "[\(type.rawValue)]"
+            let string_type = "[\(type.name)]"
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yy/MM/dd HH:mm:ss"
             let string_date = dateFormatter.string(from: Date())
@@ -50,20 +60,12 @@ public struct XCLog {
 
             // MARK: message
 
+            var message = ""
+            print(items, separator: separator, to: &message)
             if message != "" {
                 // replacingOccurrences: multi-line message support
                 print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t\t", options: .literal, range: nil))")
-            }
+            } else { return }
         } else { return }
     }
-}
-
-/// Message type.
-public enum XCLogType: String {
-    case trace = "TRACE"
-    case debug = "DEBUG"
-    case info = "INFO"
-    case warn = "WARN"
-    case error = "ERROR"
-    case fatal = "FATAL"
 }
