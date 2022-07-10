@@ -1,6 +1,6 @@
 # XCLog
 
-`XCLog` is a Swift extension that helps you print something in console when debugging your projects.
+`XCLog` is a Swift tool that helps you print something in console when debugging your projects.
 
 ## Installation
 
@@ -37,4 +37,3 @@ If you want to disable `XCLog`, set `XCLog.enable` to `false` somewhere in your 
 
 * `XCLog` supports `DocC`. Use `Xcode > Product > Build Documentation` to check it.
 * Check other documentation in `Docs/`.
-    * [Help](Docs/HELP.md)

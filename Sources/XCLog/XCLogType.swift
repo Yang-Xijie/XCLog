@@ -23,7 +23,7 @@ public enum XCLogType: Equatable {
 }
 
 extension XCLogType: Comparable {
-    public static func < (lhs: XCLogType, rhs: XCLogType) -> Bool {
+    public static func > (lhs: XCLogType, rhs: XCLogType) -> Bool {
         switch lhs {
         case .trace:
             switch rhs {

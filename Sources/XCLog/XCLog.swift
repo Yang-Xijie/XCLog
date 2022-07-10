@@ -9,8 +9,10 @@ public struct XCLog {
 
     /// Enable `XCLog` to print some types of items in console.
     ///
-    /// If you want to disable printing some `XCLogType`, set `XCLog.enableDict[XCLogType]` to `false` somewhere in your codes.
-    public static var enableDict: [XCLogType: Bool] = [
+    /// This Dictionary is private. Use `XCLog.disable(_:)`, `XCLog.enable(_:)` and `disableTypes(lessImportantThan:)` to change the Dictionary.
+    ///
+    /// Default: all types are enabled.
+    private static var enableDict: [XCLogType: Bool] = [
         .trace: true,
         .debug: true,
         .info: true,
@@ -18,6 +20,20 @@ public struct XCLog {
         .error: true,
         .fatal: true,
     ]
+
+    /// Disable certain type to be printed.
+    ///
+    /// eg. If you want to disable printing `XCLogType.debug`, call `XCLog.disable(.debug)`.
+    public static func disable(_ type: XCLogType) {
+        enableDict[type] = false
+    }
+
+    /// Enable certain type to be printed.
+    ///
+    /// eg. If you want to enable printing `XCLogType.error`, call `XCLog.disable(.error)`.
+    public static func enable(_ type: XCLogType) {
+        enableDict[type] = true
+    }
 
     /// Disable several types that are less important.
     ///

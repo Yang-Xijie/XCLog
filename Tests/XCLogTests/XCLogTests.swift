@@ -2,14 +2,7 @@
 import XCTest
 
 final class MyLibraryTests: XCTestCase {
-    func test() {
-        XCLog(.trace)
-        XCLog(.info)
-        XCLog(.debug)
-        XCLog(.warn)
-        XCLog(.error)
-        XCLog(.fatal)
-
+    func testCommonPrint() {
         XCLog("")
         XCLog("1")
         XCLog("1\n2")
@@ -42,5 +35,108 @@ final class MyLibraryTests: XCTestCase {
         XCLog.debug(["1", "2"], separator: "\n")
         XCLog.debug(["1", "2"], "3", "4", separator: ",")
         XCLog.debug(["1", "2"], "3", "4", separator: "\n")
+    }
+
+    func testDisableEnableSingle() {
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+
+        XCLog.disable(.trace)
+        XCLog.disable(.debug)
+        XCLog.disable(.info)
+        XCLog.disable(.warn)
+        XCLog.disable(.error)
+        XCLog.disable(.fatal)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+
+        XCLog.enable(.trace)
+        XCLog.enable(.debug)
+        XCLog.enable(.info)
+        XCLog.enable(.warn)
+        XCLog.enable(.error)
+        XCLog.enable(.fatal)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesLessImportantThanTrace() {
+        XCLog.disableTypes(lessImportantThan: .trace)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesLessImportantThanInfo() {
+        XCLog.disableTypes(lessImportantThan: .info)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesLessImportantThanDebug() {
+        XCLog.disableTypes(lessImportantThan: .debug)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesLessImportantThanWarn() {
+        XCLog.disableTypes(lessImportantThan: .warn)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesLessImportantThanError() {
+        XCLog.disableTypes(lessImportantThan: .error)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
+    }
+
+    func testDisableTypesImportantThanFatal() {
+        XCLog.disableTypes(lessImportantThan: .fatal)
+
+        XCLog(.trace)
+        XCLog(.debug)
+        XCLog(.info)
+        XCLog(.warn)
+        XCLog(.error)
+        XCLog(.fatal)
     }
 }
