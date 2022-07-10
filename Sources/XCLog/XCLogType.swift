@@ -1,7 +1,7 @@
 import Foundation
 
 /// Types of XCLog .
-public enum XCLogType {
+public enum XCLogType: Equatable {
     case trace, debug, info, warn, error, fatal
 
     public var name: String {

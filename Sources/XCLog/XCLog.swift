@@ -19,6 +19,19 @@ public struct XCLog {
         .fatal: true,
     ]
 
+    /// Disable several types that are less important.
+    ///
+    /// For example, call `XCLog.disableTypes(lessImportantThan: .warn)` somewhere in your codes to only show `XCLogType` of `.warn` `.error` and `.fatal`.
+    public static func disableTypes(lessImportantThan type: XCLogType) {
+        for (key, _) in enableDict {
+            if key < type {
+                enableDict[key] = false
+            } else {
+                enableDict[key] = true
+            }
+        }
+    }
+
     /// Print items in console.
     @discardableResult
     public init(_ type: XCLogType,
@@ -76,35 +89,35 @@ public struct XCLog {
 
     public static func debug(_ items: Any..., enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.debug, items,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
     public static func info(_ items: Any..., enable: Bool = true,
                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.info, items,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
     public static func warn(_ items: Any..., enable: Bool = true,
                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.warn, items,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
     public static func error(_ items: Any..., enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.error, items,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
     public static func fatal(_ items: Any..., enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.fatal, items,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
