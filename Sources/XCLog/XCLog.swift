@@ -38,6 +38,18 @@ public struct XCLog {
                 _ items: Any..., separator: String = " ",
                 enable: Bool = true,
                 fileID: String = #fileID, line: Int = #line, function: String = #function) {
+        self.init(type,
+                  items: items, separator: separator,
+                  enable: enable,
+                  fileID: fileID, line: line, function: function)
+    }
+
+    /// Print items in console.
+    @discardableResult
+    public init(_ type: XCLogType,
+                items: [Any], separator: String = " ",
+                enable: Bool = true,
+                fileID: String = #fileID, line: Int = #line, function: String = #function) {
         if Self.enable, Self.enableDict[type] ?? true, enable {
             // MARK: notation
 
@@ -52,8 +64,10 @@ public struct XCLog {
 
             // MARK: message
 
-            var message = ""
-            print(items, separator: separator, to: &message)
+            let message = Array(items).map { item in
+                return String(describing: item)
+            }
+            .joined(separator: separator)
             if message != "" {
                 // replacingOccurrences: multi-line message support
                 print("\t\t\(message.replacingOccurrences(of: "\n", with: "\n\t\t", options: .literal, range: nil))")
@@ -64,7 +78,7 @@ public struct XCLog {
     /// Print in console with no item.
     @discardableResult
     public init(_ type: XCLogType = .trace,
-                _ enable: Bool = true,
+                enable: Bool = true,
                 fileID: String = #fileID, line: Int = #line, function: String = #function) {
         self.init(type, "",
                   enable: enable,
@@ -73,51 +87,58 @@ public struct XCLog {
 
     /// Print items in console using default `XCLogType.info`.
     @discardableResult
-    public init(_ items: Any..., enable: Bool = true,
+    public init(_ items: Any..., separator: String = " ",
+                enable: Bool = true,
                 fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.info, items,
+        self.init(.info, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func trace(_ items: Any..., enable: Bool = true,
+    public static func trace(_ items: Any..., separator: String = " ",
+                             enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.trace, items,
+        self.init(.trace, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func debug(_ items: Any..., enable: Bool = true,
+    public static func debug(_ items: Any..., separator: String = " ",
+                             enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.debug, items,
+        self.init(.debug, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func info(_ items: Any..., enable: Bool = true,
+    public static func info(_ items: Any..., separator: String = " ",
+                            enable: Bool = true,
                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.info, items,
+        self.init(.info, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func warn(_ items: Any..., enable: Bool = true,
+    public static func warn(_ items: Any..., separator: String = " ",
+                            enable: Bool = true,
                             fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.warn, items,
+        self.init(.warn, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func error(_ items: Any..., enable: Bool = true,
+    public static func error(_ items: Any..., separator: String = " ",
+                             enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.error, items,
+        self.init(.error, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }
 
-    public static func fatal(_ items: Any..., enable: Bool = true,
+    public static func fatal(_ items: Any..., separator: String = " ",
+                             enable: Bool = true,
                              fileID: String = #fileID, line: Int = #line, function: String = #function) {
-        self.init(.fatal, items,
+        self.init(.fatal, items, separator: separator,
                   enable: enable,
                   fileID: fileID, line: line, function: function)
     }

@@ -15,5 +15,8 @@ let package = Package(
             name: "XCLog",
             dependencies: []
         ),
+        .testTarget(
+            name: "XCLogTests",
+            dependencies: ["XCLog"]),
     ]
 )
